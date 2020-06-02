@@ -11,7 +11,6 @@ public class MainMenu extends JFrame implements ActionListener
 	GridBagLayout gbl;
 
 	public MainMenu()
-
 	{
         jf=new JFrame();
 		gbl=new GridBagLayout();
