@@ -39,7 +39,7 @@ public class MedicineList extends JFrame
      {
 
      	Class.forName("com.mysql.jdbc.Driver");
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/medical_store?serverTimezone=UTC","root","1111");
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/medical_store?serverTimezone=UTC","root",amitss);
 		System.out.println("Connected to database.");
 		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
         rs = stmt.executeQuery("select * from medicine");
