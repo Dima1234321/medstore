@@ -115,7 +115,8 @@ public class MainMenu extends JFrame implements ActionListener
 		}
 	    else if(ae.getSource()==m1_5)
 		{
-		  new SupplierList();
+		  //new SupplierList();
+			new PatientSapplyList();
 		}
 
 
