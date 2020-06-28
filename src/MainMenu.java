@@ -12,7 +12,7 @@ public class MainMenu extends JFrame implements ActionListener
 
 	public MainMenu()
 	{
-        jf=new JFrame();
+		jf=new JFrame();
 		gbl=new GridBagLayout();
 		jf.setLayout(gbl);
 
@@ -25,60 +25,60 @@ public class MainMenu extends JFrame implements ActionListener
 
 		m1=new JMenu("Supplier");
 		mbar.add(m1);
-		m1_1 = new JMenuItem("Add New Supplier",new ImageIcon("images//addnew.png"));
+		m1_1 = new JMenuItem("Add New Supplier",new ImageIcon(getClass().getResource("images//addnew.png")));
 		m1.add(m1_1);
-		m1_2 = new JMenuItem("search Supplier",new ImageIcon("images//search.png"));
+		m1_2 = new JMenuItem("search Supplier",new ImageIcon(getClass().getResource("images//search.png")));
 		m1.add(m1_2);
-		m1_3 = new JMenuItem("Update Supplier",new ImageIcon("images//update.png"));
+		m1_3 = new JMenuItem("Update Supplier",new ImageIcon(getClass().getResource("images//update.png")));
 		m1.add(m1_3);
-		m1_4 = new JMenuItem("Delete Supplier",new ImageIcon("images//delete.png"));
+		m1_4 = new JMenuItem("Delete Supplier",new ImageIcon(getClass().getResource("images//delete.png")));
 		m1.add(m1_4);
-	    m1_5 = new JMenuItem("List of Supplier",new ImageIcon("images//all.png"));
+		m1_5 = new JMenuItem("List of Supplier",new ImageIcon(getClass().getResource("images//all.png")));
 		m1.add(m1_5);
 
 		m2=new JMenu("Medicine");
 		mbar.add(m2);
-		m2_1 = new JMenuItem("Add New Medicine",new ImageIcon("images//addnew.png"));
+		m2_1 = new JMenuItem("Add New Medicine",new ImageIcon(getClass().getResource("images//addnew.png")));
 		m2.add(m2_1);
-		m2_2 = new JMenuItem("search Medicine",new ImageIcon("images//search.png"));
+		m2_2 = new JMenuItem("search Medicine",new ImageIcon(getClass().getResource("images//search.png")));
 		m2.add(m2_2);
-		m2_3 = new JMenuItem("Update Medicine",new ImageIcon("images//update.png"));
+		m2_3 = new JMenuItem("Update Medicine",new ImageIcon(getClass().getResource("images//update.png")));
 		m2.add(m2_3);
-		m2_4 = new JMenuItem("Delete Medicine",new ImageIcon("images//delete.png"));
+		m2_4 = new JMenuItem("Delete Medicine",new ImageIcon(getClass().getResource("images//delete.png")));
 		m2.add(m2_4);
-	    m2_5 = new JMenuItem("Stock of Medicine",new ImageIcon("images//all.png"));
+		m2_5 = new JMenuItem("Stock of Medicine",new ImageIcon(getClass().getResource("images//all.png")));
 		m2.add(m2_5);
 
 
 		m3=new JMenu("Report");
-	    mbar.add(m3);
-		m3_1 = new JMenuItem("Daily Purchase Report",new ImageIcon("images//report.png"));
+		mbar.add(m3);
+		m3_1 = new JMenuItem("Daily Purchase Report",new ImageIcon(getClass().getResource("images//report.png")));
 		m3.add(m3_1);
 
-		m3_2 = new JMenuItem("Suplier wise medicine Report",new ImageIcon("images//report.png"));
+		m3_2 = new JMenuItem("Suplier wise medicine Report",new ImageIcon(getClass().getResource("images//report.png")));
 		m3.add(m3_2);
 
 		m4=new JMenu("About");
 		mbar.add(m4);
-		m4_1 = new JMenuItem("About System",new ImageIcon("images//help.png"));
+		m4_1 = new JMenuItem("About System",new ImageIcon(getClass().getResource("images//help.png")));
 		m4.add(m4_1);
 
 		m5=new JMenu("Exit");
 		mbar.add(m5);
-		m5_1 = new JMenuItem("Exit",new ImageIcon("images//exit.png"));
+		m5_1 = new JMenuItem("Exit",new ImageIcon(getClass().getResource("images//exit.png")));
 		m5.add(m5_1);
 
-        m1_1.addActionListener(this);
+		m1_1.addActionListener(this);
 		m1_2.addActionListener(this);
 		m1_3.addActionListener(this);
 		m1_4.addActionListener(this);
-    	m1_5.addActionListener(this);
+		m1_5.addActionListener(this);
 
 		m2_1.addActionListener(this);
 		m2_2.addActionListener(this);
 		m2_3.addActionListener(this);
 		m2_4.addActionListener(this);
-	    m2_5.addActionListener(this);
+		m2_5.addActionListener(this);
 
 		m3_1.addActionListener(this);
 		m3_2.addActionListener(this);
@@ -87,8 +87,8 @@ public class MainMenu extends JFrame implements ActionListener
 
 		jf.setTitle("Main Menu");
 		jf.setLocation(20,20);
-	    jf.setSize(900,700);
-	    jf.setResizable(false);
+		jf.setSize(900,700);
+		jf.setResizable(false);
 		jf.getContentPane().setBackground(Color.cyan);
 		jf.setVisible(true);
 
@@ -97,26 +97,25 @@ public class MainMenu extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 
-	  if(ae.getSource()==m1_1)
+		if(ae.getSource()==m1_1)
 		{
-		  new AddNewSupplier();
+			new AddNewSupplier();
 		}
 		else if(ae.getSource()==m1_2)
 		{
-		 new SearchSupplier();
+			new SearchSupplier();
 		}
 		else if(ae.getSource()==m1_3)
 		{
-		new UpdateSupplier();
+			new UpdateSupplier();
 		}
 		else if(ae.getSource()==m1_4)
 		{
-		new DeleteSupplier();
+			new DeleteSupplier();
 		}
-	    else if(ae.getSource()==m1_5)
+		else if(ae.getSource()==m1_5)
 		{
-		  //new SupplierList();
-			new PatientSapplyList();
+			new SupplierList();
 		}
 
 
@@ -141,27 +140,27 @@ public class MainMenu extends JFrame implements ActionListener
 			new MedicineList();
 		}
 
-		 else if(ae.getSource()==m3_1)
-		 {
-		   new DailyPurchaseReport();
-		 }
+		else if(ae.getSource()==m3_1)
+		{
+			new DailyPurchaseReport();
+		}
 
-		  else if(ae.getSource()==m3_2)
-		 {
-		   new SupplierWiseMedList();
-		 }
+		else if(ae.getSource()==m3_2)
+		{
+			new SupplierWiseMedList();
+		}
 
 		else if(ae.getSource()==m4_1)
 		{
-	        new About();
+			new About();
 		}
 
 		else if(ae.getSource()==m5_1)
 		{
-		  System.exit(0);
+			System.exit(0);
 		}
 
-  }
+	}
 
 	public static void main(String args[])
 	{
