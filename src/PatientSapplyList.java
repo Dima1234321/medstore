@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PatientSapplyList extends JFrame implements ActionListener
  {
@@ -32,7 +30,7 @@ public class PatientSapplyList extends JFrame implements ActionListener
      JScrollPane scrlPane1 = new JScrollPane(tabGrid1);
 
      String selectedId = "";
-     JButton bPlus,bMinus,bNoNeedAnymore;
+     JButton bPlus,bMinus,bNoNeedAnymore,bDeletePatientSupply, bAddPatientSupply;
 
 
 
@@ -49,6 +47,13 @@ public PatientSapplyList()
       bNoNeedAnymore = new JButton(" ~ ",new ImageIcon("images//open.png"));
       bNoNeedAnymore.setBounds(1100,425,50,20);bNoNeedAnymore.setToolTipText("click if no need anymore");
       jf.add(bNoNeedAnymore); bNoNeedAnymore.addActionListener(this);
+      bDeletePatientSupply = new JButton("delete",new ImageIcon("images//open.png"));
+      bDeletePatientSupply.setBounds(1050,660,100,20);bDeletePatientSupply.setToolTipText("click to delete");
+      jf.add(bDeletePatientSupply); bDeletePatientSupply.addActionListener(this);
+      bAddPatientSupply = new JButton("add",new ImageIcon("images//open.png"));
+      bAddPatientSupply.setBounds(900,660,100,20);bAddPatientSupply.setToolTipText("click to add");
+      jf.add(bAddPatientSupply); bAddPatientSupply.addActionListener(this);
+
 
       ListSelectionModel lsm = tabGrid.getSelectionModel();
       lsm.addListSelectionListener(new ListSelectionListener() {
@@ -89,7 +94,7 @@ public PatientSapplyList()
       ln1.setBounds(300,400,350,25);
       jf.add(ln1);
 
-      scrlPane1.setBounds(0,450,1200,300);
+      scrlPane1.setBounds(0,450,1200,200);
       jf.add(scrlPane1);
       tabGrid1.setFont(new Font ("Times New Roman",0,15));
 
@@ -187,15 +192,24 @@ public PatientSapplyList()
   }
      @Override
      public void actionPerformed(ActionEvent actionEvent) {
+         int rr = tabGrid.getSelectedRow();
+         if(rr < 0)
+             return;
+         String p_id = tabGrid.getModel().getValueAt(rr, 0).toString();
+         if(actionEvent.getSource() == bAddPatientSupply) {
+             //p_id
+             new AddNewSupplyToPatient(p_id);
+         }
+
          int r = tabGrid1.getSelectedRow();
          if(r < 0)
              return;
          int need = Integer.parseInt(tabGrid1.getModel().getValueAt(r, 4).toString());
          int exist = Integer.parseInt(tabGrid1.getModel().getValueAt(r, 5).toString());
-         String p_id = tabGrid1.getModel().getValueAt(r, 8).toString();
+
          String s_id = tabGrid1.getModel().getValueAt(r, 6).toString();
 
-         Object supply_record[] = getSupplyRecors(tabGrid1.getModel().getValueAt(r, 6).toString());
+         Object supply_record[] = getSupplyRecords(tabGrid1.getModel().getValueAt(r, 6).toString());
          int amount = Integer.parseInt(supply_record[4].toString());
 
          if(actionEvent.getSource() == bPlus) {
@@ -214,6 +228,62 @@ public PatientSapplyList()
              }
          }
 
+         if(actionEvent.getSource() == bMinus) {
+             if(exist > 0) {
+                 need = need + 1;
+                 exist = exist - 1;
+                 amount = amount + 1;
+             }
+             else {
+                 JOptionPane.showMessageDialog(null,"they already have nothing. why try to take away?!");
+                 return;
+             }
+         }
+
+         if(actionEvent.getSource() == bNoNeedAnymore) {
+             if(exist > 0 || need > 0) {
+                 need = 0;
+                 exist = 0;
+                 amount = amount + exist;
+             }
+             else {
+                 JOptionPane.showMessageDialog(null,"the patient not need and have not anything no longer");
+                 return;
+             }
+         }
+
+         if(actionEvent.getSource() == bDeletePatientSupply) {
+             if(exist > 0 || need > 0) {
+                 JOptionPane.showMessageDialog(null,"the patient need or have some devices. no actions performed");
+                 return;
+             }
+             else {
+                 try
+                 {
+                     Class.forName("com.mysql.jdbc.Driver");
+                     con=DriverManager.getConnection("jdbc:mysql://localhost:3306/medical_store?serverTimezone=UTC","root","1111");
+                     System.out.println("Connected to database.");
+                     stmt=con.createStatement();
+                     String str1="delete from patient_supply where id_patient=" + p_id + " and id_supply=" + s_id + ";";
+                     stmt.executeUpdate(str1);
+                     //JOptionPane.showMessageDialog(null, "Record is updated");
+                     con.close();
+                     model1.removeRow(r);
+                     return;
+                 }
+                 catch(SQLException se)
+                 {
+                     System.out.println(se);
+                     JOptionPane.showMessageDialog(null,"SQL Error:"+se);
+                 }
+                 catch(Exception e)
+                 {
+                     System.out.println(e);
+                     JOptionPane.showMessageDialog(null,"Error:"+e);
+                 }
+             }
+         }
+
          try
          {
              Class.forName("com.mysql.jdbc.Driver");
@@ -224,7 +294,7 @@ public PatientSapplyList()
              String str2=" UPDATE supply SET amount=" + amount + " where id=" + s_id + ";";
              stmt.executeUpdate(str1 );
              stmt.executeUpdate(str2 );
-             JOptionPane.showMessageDialog(null, "Record is updated");
+             //JOptionPane.showMessageDialog(null, "Record is updated");
              tabGrid1.getModel().setValueAt(need, r, 4);
              tabGrid1.getModel().setValueAt(exist, r, 5);
              con.close();
@@ -242,7 +312,7 @@ public PatientSapplyList()
 
      }
 
-     public Object[] getSupplyRecors(String supplyId){
+     public Object[] getSupplyRecords(String supplyId){
          //////////////  2  /////////////
          Object[] obj = null;
          try

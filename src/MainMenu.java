@@ -23,21 +23,21 @@ public class MainMenu extends JFrame implements ActionListener
 		mbar = new JMenuBar();
 		jf.setJMenuBar(mbar);
 
-		m1=new JMenu("Supplier");
+		m1=new JMenu("Actions");
 		mbar.add(m1);
 		m1_1 = new JMenuItem("Add New Supplier",new ImageIcon("images//addnew.png"));
-		m1.add(m1_1);
+		//m1.add(m1_1);
 		m1_2 = new JMenuItem("search Supplier",new ImageIcon("images//search.png"));
-		m1.add(m1_2);
-		m1_3 = new JMenuItem("Update Supplier",new ImageIcon("images//update.png"));
+		//m1.add(m1_2);
+		m1_3 = new JMenuItem("Supplier",new ImageIcon("images//update.png"));
 		m1.add(m1_3);
-		m1_4 = new JMenuItem("Delete Supplier",new ImageIcon("images//delete.png"));
+		m1_4 = new JMenuItem("Patient",new ImageIcon("images//delete.png"));
 		m1.add(m1_4);
-	    m1_5 = new JMenuItem("List of Supplier",new ImageIcon("images//all.png"));
+	    m1_5 = new JMenuItem("Patient & Supply",new ImageIcon("images//all.png"));
 		m1.add(m1_5);
 
 		m2=new JMenu("Medicine");
-		mbar.add(m2);
+		//mbar.add(m2);
 		m2_1 = new JMenuItem("Add New Medicine",new ImageIcon("images//addnew.png"));
 		m2.add(m2_1);
 		m2_2 = new JMenuItem("search Medicine",new ImageIcon("images//search.png"));
@@ -51,7 +51,7 @@ public class MainMenu extends JFrame implements ActionListener
 
 
 		m3=new JMenu("Report");
-	    mbar.add(m3);
+	    //mbar.add(m3);
 		m3_1 = new JMenuItem("Daily Purchase Report",new ImageIcon("images//report.png"));
 		m3.add(m3_1);
 
@@ -59,12 +59,12 @@ public class MainMenu extends JFrame implements ActionListener
 		m3.add(m3_2);
 
 		m4=new JMenu("About");
-		mbar.add(m4);
+		//mbar.add(m4);
 		m4_1 = new JMenuItem("About System",new ImageIcon("images//help.png"));
 		m4.add(m4_1);
 
 		m5=new JMenu("Exit");
-		mbar.add(m5);
+		//mbar.add(m5);
 		m5_1 = new JMenuItem("Exit",new ImageIcon("images//exit.png"));
 		m5.add(m5_1);
 
@@ -74,7 +74,7 @@ public class MainMenu extends JFrame implements ActionListener
 		m1_4.addActionListener(this);
     	m1_5.addActionListener(this);
 
-		m2_1.addActionListener(this);
+		/*m2_1.addActionListener(this);
 		m2_2.addActionListener(this);
 		m2_3.addActionListener(this);
 		m2_4.addActionListener(this);
@@ -83,7 +83,7 @@ public class MainMenu extends JFrame implements ActionListener
 		m3_1.addActionListener(this);
 		m3_2.addActionListener(this);
 		m4_1.addActionListener(this);
-		m5_1.addActionListener(this);
+		m5_1.addActionListener(this);*/
 
 		jf.setTitle("Main Menu");
 		jf.setLocation(20,20);
@@ -99,7 +99,8 @@ public class MainMenu extends JFrame implements ActionListener
 
 	  if(ae.getSource()==m1_1)
 		{
-		  new AddNewSupplier();
+		  //new AddNewSupplier();
+			new AddNewSupplyToPatient();
 		}
 		else if(ae.getSource()==m1_2)
 		{
@@ -107,11 +108,13 @@ public class MainMenu extends JFrame implements ActionListener
 		}
 		else if(ae.getSource()==m1_3)
 		{
-		new UpdateSupplier();
+			//new UpdateSupplier();
+			new UpdateSupply();
 		}
 		else if(ae.getSource()==m1_4)
 		{
-		new DeleteSupplier();
+		//new DeleteSupplier();
+			new UpdatePatient();
 		}
 	    else if(ae.getSource()==m1_5)
 		{
