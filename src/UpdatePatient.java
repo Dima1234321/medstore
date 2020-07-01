@@ -45,43 +45,43 @@ public class UpdatePatient extends JFrame implements ActionListener
 		jf.add(l1);
 
 		t1=new JTextField(20);
-		t1.setBounds(320,120,100,25);t1.setToolTipText("Enter supplier id");
+		t1.setBounds(320,120,100,25);t1.setToolTipText("Enter patient id");
 		jf.add(t1);
 
-		l2 = new JLabel("Patient name*");
+		l2 = new JLabel("Patient name");
 		//l2.setFont(f);
   l2.setBounds(150,160,170,25);
 		jf.add(l2);
 
 		t2=new JTextField(20);
-		t2.setBounds(320,160,200,25);t2.setToolTipText("Enter supplier name");
+		t2.setBounds(320,160,200,25);t2.setToolTipText("Enter patient name");
 		jf.add(t2);
 
-		l3 = new JLabel("Patient location*");
+		l3 = new JLabel("Patient birth date");
 		//l3.setFont(f);
   l3.setBounds(150,200,170,25);
 		jf.add(l3);
 
 		t3=new JTextField(20);
-		t3.setBounds(320,200,250,25);t3.setToolTipText("Enter supplier location");
+		t3.setBounds(320,200,250,25);t3.setToolTipText("Enter birth date");
 		jf.add(t3);
 
-		l4 = new JLabel("Patient device name");
+		l4 = new JLabel("Patient phone number");
 		//l4.setFont(f);
   l4.setBounds(150,240,170,25);
 		jf.add(l4);
 
 		t4=new JTextField(20);
-		t4.setBounds(320,240,100,25);t4.setToolTipText("Enter supplier device name");
+		t4.setBounds(320,240,100,25);t4.setToolTipText("Enter phone number");
 		jf.add(t4);
 
-		l5 = new JLabel("Patient amount");
+		l5 = new JLabel("Patient address");
 		//l5.setFont(f);
   		l5.setBounds(150,280,170,25);
 		jf.add(l5);
 
 		t5=new JTextField(20);
-		t5.setBounds(320,280,200,25);t5.setToolTipText("Enter supplier amount");
+		t5.setBounds(320,280,200,25);t5.setToolTipText("Enter patient address");
 		jf.add(t5);
 
 
@@ -130,19 +130,19 @@ public class UpdatePatient extends JFrame implements ActionListener
 		});
 
 
-        b0 = new JButton("Add",new ImageIcon("images//open.png"));
+        b0 = new JButton("Add",new ImageIcon(getClass().getResource("images//addnew.png")));
 	    b0.setBounds(150,400,110,35);b0.setToolTipText("click to add supplier details");
 	    jf.add(b0); b0.addActionListener(this);
 
-		b1 = new JButton("Update",new ImageIcon("images//update.png"));
+		b1 = new JButton("Update",new ImageIcon(getClass().getResource("images//update.png")));
 		b1.setBounds(300,400,110,35);b1.setToolTipText("click to update supplier details");
 		jf.add(b1);b1.addActionListener(this);
 
-		b2 = new JButton("Delete",new ImageIcon("images//clear.png"));
+		b2 = new JButton("Delete",new ImageIcon(getClass().getResource("images//delete.png")));
 		b2.setBounds(450,400,110,35);b2.setToolTipText("click to delete all textfilds");
 	    jf.add(b2);b2.addActionListener(this);
 
-	   	b3 = new JButton("Show",new ImageIcon("images//all.png"));
+	   	b3 = new JButton("Show",new ImageIcon(getClass().getResource("images//search.png")));
 		b3.setBounds(600,400,110,35);b3.setToolTipText("click to view all supplier details in grid below");
 		jf.add(b3); b3.addActionListener(this);
 
@@ -155,10 +155,10 @@ public class UpdatePatient extends JFrame implements ActionListener
         model.addColumn("BIRTHDATE");
         model.addColumn("PHONE");
         model.addColumn("LOCATION");
+		model.addColumn("STATUS1");
+		model.addColumn("TYPE1");
 		model.addColumn("STATUS");
 		model.addColumn("TYPE");
-		model.addColumn("STATUS_DESCR");
-		model.addColumn("TYPE_DESCR");
 		tabGrid.getColumnModel().getColumn(5).setMinWidth(0);
 		tabGrid.getColumnModel().getColumn(5).setMaxWidth(0);
 		tabGrid.getColumnModel().getColumn(6).setMinWidth(0);
@@ -187,7 +187,7 @@ public class UpdatePatient extends JFrame implements ActionListener
 	     jf.setSize(900,800);
 		 jf.setLocation(20,20);
 		 jf.setResizable(false);
-		 jf.getContentPane().setBackground(Color.cyan);
+		 jf.getContentPane().setBackground(new Color(204, 255, 204));
 	     jf.setVisible(true);
 	}
 

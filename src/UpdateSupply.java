@@ -39,7 +39,7 @@ public class UpdateSupply extends JFrame implements ActionListener
 	    l6.setBounds(300,50,300,40);l6.setForeground(Color.blue);
 	    jf.add(l6);
 
-		l1= new JLabel("Supplier id *");
+		l1= new JLabel("Supplier id");
 		//l1.setFont(f);
  l1.setBounds(150,120,130,25);
 		jf.add(l1);
@@ -48,7 +48,7 @@ public class UpdateSupply extends JFrame implements ActionListener
 		t1.setBounds(320,120,100,25);t1.setToolTipText("Enter supplier id");
 		jf.add(t1);
 
-		l2 = new JLabel("Supplier name*");
+		l2 = new JLabel("Supplier name");
 		//l2.setFont(f);
   l2.setBounds(150,160,170,25);
 		jf.add(l2);
@@ -85,23 +85,23 @@ public class UpdateSupply extends JFrame implements ActionListener
 		jf.add(t5);
 
 
-        b0 = new JButton("Add",new ImageIcon("images//open.png"));
+        b0 = new JButton("Add",new ImageIcon(getClass().getResource("images//addnew.png")));
 	    b0.setBounds(150,330,110,35);b0.setToolTipText("click to add supplier details");
 	    jf.add(b0); b0.addActionListener(this);
 
-		b1 = new JButton("Update",new ImageIcon("images//update.png"));
+		b1 = new JButton("Update",new ImageIcon(getClass().getResource("images//update.png")));
 		b1.setBounds(300,330,110,35);b1.setToolTipText("click to update supplier details");
 		jf.add(b1);b1.addActionListener(this);
 
-		b2 = new JButton("Delete",new ImageIcon("images//clear.png"));
+		b2 = new JButton("Delete",new ImageIcon(getClass().getResource("images//delete.png")));
 		b2.setBounds(450,330,110,35);b2.setToolTipText("click to delete all textfilds");
 	    jf.add(b2);b2.addActionListener(this);
 
-	   	b3 = new JButton("Show",new ImageIcon("images//all.png"));
+	   	b3 = new JButton("Show",new ImageIcon(getClass().getResource("images//search.png")));
 		b3.setBounds(600,330,110,35);b3.setToolTipText("click to view all supplier details in grid below");
 		jf.add(b3); b3.addActionListener(this);
 
-	    scrlPane.setBounds(0,380,900,600);
+	    scrlPane.setBounds(0,380,900,260);
         jf.add(scrlPane);
         tabGrid.setFont(new Font ("Times New Roman",0,15));
 
@@ -131,7 +131,7 @@ public class UpdateSupply extends JFrame implements ActionListener
 	     jf.setSize(900,700);
 		 jf.setLocation(20,20);
 		 jf.setResizable(false);
-		 jf.getContentPane().setBackground(Color.cyan);
+		 jf.getContentPane().setBackground(new Color(204, 204, 153));
 	     jf.setVisible(true);
 	}
 

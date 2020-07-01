@@ -73,11 +73,11 @@ public void init(){
 	t3.setBounds(320,200,250,25);t3.setToolTipText("Enter device name");
 	jf.add(t3);
 
-	b2 = new JButton("show",new ImageIcon("images//all.png"));
+	b2 = new JButton("show",new ImageIcon(getClass().getResource("images//all.png")));
 	b2.setBounds(460,260,110,35);b2.setToolTipText("click to view");
 	jf.add(b2); b2.addActionListener(this);
 
-	addToPatient = new JButton("add to patient",new ImageIcon("images//all.png"));
+	addToPatient = new JButton("add to patient",new ImageIcon(getClass().getResource("images//all.png")));
 	addToPatient.setBounds(700,590,150,35);addToPatient.setToolTipText("add to patient");
 	jf.add(addToPatient); addToPatient.addActionListener(this);
 
@@ -105,7 +105,7 @@ public void init(){
 	jf.setSize(900,700);
 	jf.setLocation(20,20);
 	jf.setResizable(false);
-	jf.getContentPane().setBackground(Color.cyan);
+	jf.getContentPane().setBackground(new Color(102, 204, 255));
 	jf.setVisible(true);
 }
 public void actionPerformed(ActionEvent ae)

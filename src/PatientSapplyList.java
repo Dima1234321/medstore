@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.*;
 
 public class PatientSapplyList extends JFrame implements ActionListener
@@ -31,39 +33,43 @@ public class PatientSapplyList extends JFrame implements ActionListener
 
      String selectedId = "";
      JButton bPlus,bMinus,bNoNeedAnymore,bDeletePatientSupply, bAddPatientSupply;
+     JCheckBox cbNeed;
 
 
 
-public PatientSapplyList()
+     public PatientSapplyList()
   {
     jf.setLayout(null);
 
-      bPlus = new JButton(" + ",new ImageIcon("images//open.png"));
+      bPlus = new JButton(" + ",new ImageIcon(getClass().getResource("images//open.png")));
       bPlus.setBounds(900,425,50,20); bPlus.setToolTipText("click to add needed devices");
       jf.add(bPlus); bPlus.addActionListener(this);
-      bMinus = new JButton(" - ",new ImageIcon("images//open.png"));
+      bMinus = new JButton(" - ",new ImageIcon(getClass().getResource("images//open.png")));
       bMinus.setBounds(1000,425,50,20);bMinus.setToolTipText("click to remove unused devices");
       jf.add(bMinus); bMinus.addActionListener(this);
-      bNoNeedAnymore = new JButton(" ~ ",new ImageIcon("images//open.png"));
+      bNoNeedAnymore = new JButton(" ~ ",new ImageIcon(getClass().getResource("images//open.png")));
       bNoNeedAnymore.setBounds(1100,425,50,20);bNoNeedAnymore.setToolTipText("click if no need anymore");
       jf.add(bNoNeedAnymore); bNoNeedAnymore.addActionListener(this);
-      bDeletePatientSupply = new JButton("delete",new ImageIcon("images//open.png"));
+      bDeletePatientSupply = new JButton("delete",new ImageIcon(getClass().getResource("images//open.png")));
       bDeletePatientSupply.setBounds(1050,660,100,20);bDeletePatientSupply.setToolTipText("click to delete");
       jf.add(bDeletePatientSupply); bDeletePatientSupply.addActionListener(this);
-      bAddPatientSupply = new JButton("add",new ImageIcon("images//open.png"));
+      bAddPatientSupply = new JButton("add",new ImageIcon(getClass().getResource("images//open.png")));
       bAddPatientSupply.setBounds(900,660,100,20);bAddPatientSupply.setToolTipText("click to add");
       jf.add(bAddPatientSupply); bAddPatientSupply.addActionListener(this);
+
 
 
       ListSelectionModel lsm = tabGrid.getSelectionModel();
       lsm.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                // do some actions here, for example
-                // print first column value from selected row
-                selectedId =  tabGrid.getValueAt(tabGrid.getSelectedRow(), 0).toString();
-                showSupplyForPatient(selectedId);
-                //int i = lsm.getMinSelectionIndex();
-                //JOptionPane.showMessageDialog(null, "selected row " + id);
+                int r = tabGrid.getSelectedRow();
+                if(r != -1) {
+                    selectedId = tabGrid.getValueAt(r, 0).toString();
+                    showSupplyForPatient(selectedId);
+                }
+                else {
+                    showSupplyForPatient("-1");
+                }
             }
       });
 
@@ -75,7 +81,18 @@ public PatientSapplyList()
     ln.setBounds(300,30,350,25);
     jf.add(ln);
 
-    scrlPane.setBounds(0,80,1200,300);
+    cbNeed = new JCheckBox("Only persons or organization that need supply");
+    cbNeed.setBounds(800,30, 330,25);
+    jf.add(cbNeed);
+
+      cbNeed.addItemListener(new ItemListener() {
+          public void itemStateChanged(ItemEvent e) {
+              showPatient(e.getStateChange());
+          }
+      });
+
+
+      scrlPane.setBounds(0,80,1200,300);
     jf.add(scrlPane);
     tabGrid.setFont(new Font ("Times New Roman",0,15));
 
@@ -86,6 +103,7 @@ public PatientSapplyList()
   	model.addColumn("LOCATION");
   	model.addColumn("STATUS");
   	model.addColumn("TYPE");
+  	model.addColumn("NEED");
 
   	/*-------------- 2 ---------------------------*/
       ln1 = new JLabel("Supply");
@@ -116,42 +134,53 @@ public PatientSapplyList()
 ///////////////////////////////////////////////////////////
 
 
-  		int r = 0;
-     try
-     {
-
-     	Class.forName("com.mysql.jdbc.Driver");
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/medical_store?serverTimezone=UTC","root","1111");
-		System.out.println("Connected to database.");
-		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-        rs = stmt.executeQuery("select * from patient");
-          while(rs.next())
-            {
-            	model.insertRow(r++,new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)});
-            }
-
-             con.close();
-       }
-      catch(SQLException se)
-       {
-       	  System.out.println(se);
-          JOptionPane.showMessageDialog(null,"SQL Error:"+se);
-       }
-       catch(Exception e)
-       {
-       	   System.out.println(e);
-           JOptionPane.showMessageDialog(null,"Error:"+e);
-       }
+      showPatient(0);
 
 
     jf.setTitle("Supplier List");
     jf.setSize(1200,800);
     jf.setLocation(20,20);
 	jf.setResizable(false);
-    jf.getContentPane().setBackground(Color.cyan);
+    jf.getContentPane().setBackground(new Color(204, 255, 255));
     jf.setVisible(true);
   }
 
+
+  public void showPatient(int isNeed){
+      int r = 0;
+      try
+      {
+
+          Class.forName("com.mysql.jdbc.Driver");
+          con=DriverManager.getConnection("jdbc:mysql://localhost:3306/medical_store?serverTimezone=UTC","root","1111");
+          System.out.println("Connected to database.");
+          stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+          String s = "SELECT id, name, birthdate, phone, location, (case when status = 1 then \"infected\" else \"recovered\" end) status, (case when type = 1 then \"private person\" else \"public place\" end) type, (select sum(needed) from patient_supply where id_patient = id) needed FROM patient ";
+          if(isNeed == 1)
+              s += "where (select sum(needed) from patient_supply where id_patient = id) > 0";
+          rs = stmt.executeQuery(s);
+          if (model.getRowCount() > 0) {
+              for (int i = model.getRowCount() - 1; i > -1; i--) {
+                  model.removeRow(i);
+              }
+          }
+          while(rs.next())
+          {
+              model.insertRow(r++,new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8)});
+          }
+          con.close();
+      }
+      catch(SQLException se)
+      {
+          System.out.println(se);
+          JOptionPane.showMessageDialog(null,"SQL Error:"+se);
+      }
+      catch(Exception e)
+      {
+          System.out.println(e);
+          JOptionPane.showMessageDialog(null,"Error:"+e);
+      }
+  }
 
   public void showSupplyForPatient(String patientId){
       //////////////  2  /////////////
