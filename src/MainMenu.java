@@ -20,7 +20,7 @@ public class MainMenu extends JFrame implements ActionListener
 		gbl=new GridBagLayout();
 		jf.setLayout(null);
 
-		l1=new JLabel("WELCOME TO MEDICAL STOCK - PATIENT MANAGEMENT SYSTEM");
+		l1=new JLabel("WELCOME TO PATIENT - MEDICAL SUPPLIES MANAGEMENT SYSTEM");
 		l1.setFont(new Font("Times New Roman",Font.BOLD,20));
 		l1.setBounds(100,30,900,100);
 		jf.add(l1);

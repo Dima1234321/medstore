@@ -13,7 +13,7 @@ class About extends JFrame
 
 		jf.setLayout(null);
 
-		l1 = new JLabel("Patient - Medical Supplies Manangement System");
+		l1 = new JLabel("Patient - Medical Supplies Management System");
 		l1.setFont(new Font("Times New Roman",Font.BOLD,25));
 		l1.setBounds(200,30,600,40);l1.setForeground(Color.blue);
 		jf.add(l1);
