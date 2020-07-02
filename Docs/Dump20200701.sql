@@ -76,7 +76,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (123,'HIT',NULL,'03-1232234','Golomb St 52, Holon, 5810201',1,1),(200441467,'Amit Shnaiderman','1993-03-10','053-3855523','very near HIT, Holon',1,1),(308335918,'David Zukerman','1997-01-20','054-92472304','Vaizman 125, Bat Yam',1,1),(313108342,'Dima Ruven','1986-01-28','0547-2423320','ha-Shomron 19, Holon',2,1),(323501890,'Alexandra Fedorov','1995-05-03','054-3742947','Rabin street, 22',2,1);
+INSERT INTO `patient` VALUES (123,'HIT',NULL,'03-1232234','Golomb St 52, Holon, 5810201',1,1),(200441467,'Amit Shani','1993-03-10','053-3855523','very near HIT, Holon',1,1),(308335918,'David Zukerman','1997-01-20','054-92472304','Vaizman 125, Bat Yam',1,1),(313108342,'Dima Ruven','1986-01-28','0547-2423320','ha-Shomron 19, Holon',2,1),(323501890,'Alexandra Fedorov','1995-05-03','054-3742947','Rabin street, 22',2,1);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
