@@ -46,7 +46,7 @@ public class PatientController {
             con.close();
         }
         catch(SQLException se) {
-            throw new Exception("SQL Error:"+se);
+            throw new SQLException("SQL Error:"+se);
         }
         catch(Exception e) {
             throw new Exception("Error:"+e);
@@ -86,7 +86,7 @@ public class PatientController {
             con.close();
         }
         catch(SQLException se) {
-            throw new Exception("SQL Error:"+se);
+            throw new SQLException("SQL Error:"+se);
         }
         catch(Exception e) {
             throw new Exception("Error:"+e);
