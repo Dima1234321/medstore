@@ -207,8 +207,9 @@ public class UpdatePatient extends JFrame implements ActionListener
 	{
       if(ae.getSource()==b0)
       {
-		  addPatient(t1.getText(),t2.getText(),t3.getText(),t4.getText(),t5.getText(),t6.getText(),t7.getText());
-    }
+      	  if(!t1.getText().isEmpty())
+		  	addPatient(t1.getText(),t2.getText(),t3.getText(),t4.getText(),t5.getText(),t6.getText(),t7.getText());
+      }
      else if(ae.getSource()==b1) {//update
 		  int r = tabGrid.getSelectedRow();
 		  if(r < 0)

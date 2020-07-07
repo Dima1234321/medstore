@@ -29,6 +29,8 @@ public class PatientController {
     }
 
     public Patient insertPatient(String id, String name, String birthdate, String phone, String location, String status, String type) throws Exception {
+
+
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
