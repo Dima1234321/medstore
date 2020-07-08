@@ -27,7 +27,7 @@ class About extends JFrame
 		l2.setBounds(100,150,600,40);
 		jf.add(l2);
 
-		l3 = new JLabel("Dima Ruven, David Zukerman, Amit Shnaiderman, Alexandra Fedorov");
+		l3 = new JLabel("Dima Ruven, David Tzukerman, Amit Shani, Alexandra Fedorov");
 		l3.setFont(new Font("Times New Roman",Font.BOLD,18));
 		l3.setBounds(100,200,800,40);l3.setForeground(Color.red);
 		jf.add(l3);

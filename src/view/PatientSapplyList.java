@@ -54,13 +54,13 @@ public class PatientSapplyList extends JFrame implements ActionListener
 
       jf.setLayout(null);
 
-      bPlus = new JButton(" + ",new ImageIcon(getClass().getResource("..//images//open.png")));
+      bPlus = new JButton(" + ",new ImageIcon("..//images//open.png"));
       bPlus.setBounds(900,425,50,20); bPlus.setToolTipText("click to add needed devices");
       jf.add(bPlus); bPlus.addActionListener(this);
-      bMinus = new JButton(" - ",new ImageIcon(getClass().getResource("..//images//open.png")));
+      bMinus = new JButton(" - ",new ImageIcon("..//images//open.png"));
       bMinus.setBounds(1000,425,50,20);bMinus.setToolTipText("click to remove unused devices");
       jf.add(bMinus); bMinus.addActionListener(this);
-      bNoNeedAnymore = new JButton(" ~ ",new ImageIcon(getClass().getResource("..//images//open.png")));
+      bNoNeedAnymore = new JButton(" ~ ",new ImageIcon("..//images//open.png"));
       bNoNeedAnymore.setBounds(1100,425,50,20);bNoNeedAnymore.setToolTipText("click if no need anymore");
       jf.add(bNoNeedAnymore); bNoNeedAnymore.addActionListener(this);
       bDeletePatientSupply = new JButton("delete",new ImageIcon(getClass().getResource("..//images//open.png")));

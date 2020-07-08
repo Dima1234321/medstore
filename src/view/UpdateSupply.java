@@ -140,7 +140,8 @@ public class UpdateSupply extends JFrame implements ActionListener
 	{
       if(ae.getSource()==b0)
       {
-		  addSupply(t1.getText(),t2.getText(),t3.getText(),t4.getText(),t5.getText());
+		  if(!t1.getText().isEmpty())
+		  	addSupply(t1.getText(),t2.getText(),t3.getText(),t4.getText(),t5.getText());
     }
      else if(ae.getSource()==b1) {//update
 		  int r = tabGrid.getSelectedRow();
