@@ -53,7 +53,11 @@ public class PatientController {
         catch(Exception e) {
             throw new Exception("Error:"+e);
         }
-        return new Patient(id,name,birthdate,phone,location,status,type);
+        Patient p =  Patient.builder().withId(id).withName(name).
+                withPhone(phone).withLocation(location).withStatus(status).withType(type).build();
+        return p;
+
+                //(id,name,birthdate,phone,location,status,type);
     }
 
     public Patient updatePatient(String id, String name, String birthdate, String phone, String location, String status, String type) throws Exception {
@@ -73,7 +77,9 @@ public class PatientController {
         catch(Exception e) {
             throw new Exception("Error:"+e);
         }
-        return new Patient(id,name,birthdate,phone,location,status,type);
+        Patient p =  Patient.builder().withId(id).withName(name).
+                withPhone(phone).withLocation(location).withStatus(status).withType(type).build();
+        return p;
     }
 
     public void deletePatient(String id) throws Exception {
@@ -122,7 +128,11 @@ public class PatientController {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             rs = stmt.executeQuery("SELECT id, name, birthdate, phone, location, status, type, (case when status = 1 then \"infected\" else \"recovered\" end) status_descr, (case when type = 1 then \"private person\" else \"public place\" end) type_descr FROM patient " + where_clause);
             while(rs.next()) {
-                patients.add(new Patient(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7)));
+                Patient p =  Patient.builder().withId(rs.getString(1)).withName(rs.getString(2)).withBirthdate(rs.getString(3)).
+                        withPhone(rs.getString(4)).withLocation(rs.getString(5)).withStatus(rs.getString(6)).
+                        withType(rs.getString(7)).build();
+                patients.add(p);
+                //new Patient(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7))
             }
             con.close();
         }
@@ -149,7 +159,10 @@ public class PatientController {
             rs = stmt.executeQuery(s);
             while(rs.next())
             {
-                patients.add(new Patient(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8)));
+                Patient p =  Patient.builder().withId(rs.getString(1)).withName(rs.getString(2)).withBirthdate(rs.getString(3)).
+                        withPhone(rs.getString(4)).withLocation(rs.getString(5)).withStatus(rs.getString(6)).
+                        withType(rs.getString(7)).withNeed(rs.getString(8)).build();
+                patients.add(p);
             }
             con.close();
         }

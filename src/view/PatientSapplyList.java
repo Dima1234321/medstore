@@ -169,7 +169,8 @@ public class PatientSapplyList extends JFrame implements ActionListener
           }
           int r = 0;
           for (Patient p  : patients) {
-              model.insertRow(r++,new Object[]{ p.id ,p.name, p.birthdate, p.phone, p.location, p.status_descr(), p.type_descr(), p.needed});
+              model.insertRow(r++,new Object[]{ p.getId() ,p.getName(), p.getBirthdate(), p.getPhone(), p.getLocation(),
+                      p.status_descr(), p.type_descr(), p.getNeeded()});
           }
       }
       catch(Exception se) {

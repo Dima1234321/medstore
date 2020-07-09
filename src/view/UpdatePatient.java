@@ -245,13 +245,13 @@ public class UpdatePatient extends JFrame implements ActionListener
 		{
 			Patient p = pc.updatePatient(id,name,birthdate,phone,location,status,type);
 			JOptionPane.showMessageDialog(null,"Successfully updated");
-			tabGrid.getModel().setValueAt(p.id, r, 0);
-			tabGrid.getModel().setValueAt(p.name, r, 1);
-			tabGrid.getModel().setValueAt(p.birthdate, r, 2);
-			tabGrid.getModel().setValueAt(p.phone, r, 3);
-			tabGrid.getModel().setValueAt(p.location, r, 4);
-			tabGrid.getModel().setValueAt(p.status, r, 5);
-			tabGrid.getModel().setValueAt(p.type, r, 6);
+			tabGrid.getModel().setValueAt(p.getId(), r, 0);
+			tabGrid.getModel().setValueAt(p.getName(), r, 1);
+			tabGrid.getModel().setValueAt(p.getBirthdate(), r, 2);
+			tabGrid.getModel().setValueAt(p.getPhone(), r, 3);
+			tabGrid.getModel().setValueAt(p.getLocation(), r, 4);
+			tabGrid.getModel().setValueAt(p.getStatus(), r, 5);
+			tabGrid.getModel().setValueAt(p.getType(), r, 6);
 			tabGrid.getModel().setValueAt(p.status_descr() , r, 7);
 			l6_6.setText(p.status_descr());
 			tabGrid.getModel().setValueAt(p.type_descr() , r, 8);
@@ -287,7 +287,8 @@ public class UpdatePatient extends JFrame implements ActionListener
 			}
 			int r = 0;
 			for (Patient p  : patients) {
-				model.insertRow(r++,new Object[]{ p.id ,p.name, p.birthdate, p.phone, p.location, p.status, p. type, p.status_descr(), p.type_descr()});
+				model.insertRow(r++,new Object[]{ p.getId() ,p.getName(), p.getBirthdate(), p.getPhone(), p.getLocation(),
+						p.getStatus(), p.getType() , p.status_descr(), p.type_descr()});
 			}
 		}
 		catch(Exception se) {
